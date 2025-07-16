@@ -1,7 +1,6 @@
-# 本题和最后一块石头的重量差不多
 # 目标：最小化kx-y，其中y为sum(nums)-x
 # 因此最小化的目标是：abs(kx-sum(nums)+x) = abs((k+1)x-sum(nums))，并且k为固定值，sum(nums)也是固定值，那么我们需要最小化x即可
-# 我们应当尽可能的让(k+1)x-sum(nums)==0，这样才能让kx和y的值尽可能的小，也就是说让x尽可能的去接近sum(nums)//(k+1)
+# 我们应当尽可能的让abs((k+1)x-sum(nums))==0，这样才能让kx和y的值尽可能的小，也就是说让x尽可能的去接近sum(nums)/(k+1)
 
 
 # 思路：找到最小的两个数和最大的两个数，比较这两组数的结果即可
@@ -21,9 +20,6 @@ def solution(nums, n, k):
     nums.sort()
 
     # 找到最接近sum(nums)//2*k的两堆和
-    min_sum = nums[0]+nums[1]
-    max_sum = nums[-1]+nums[-2]
-
     target_sum = sum(nums)/(k+1) # 目标值
 
     def find_closest(target_sum):
@@ -34,7 +30,6 @@ def solution(nums, n, k):
             current_sum = nums[left]+nums[right]
             if abs(current_sum-target_sum)<abs(closest-target_sum):
                 closest = current_sum
-            
             if current_sum<target_sum:
                 left+=1
             elif current_sum>target_sum:
