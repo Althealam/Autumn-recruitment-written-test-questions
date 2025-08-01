@@ -5,14 +5,14 @@ n, k = map(int, input().split())
 a = list(map(int, input().split()))
 
 
-ans = 1 # 最少能分的段数
-cur = 0 # 这是当前的位运算结果
+ans = 1 # 最少的段数
+cur = 0 # 当前子段的位运算结果
 for i in range(n):
     if a[i]>k: # 如果数组中有一个元素值已经大于了k，那么直接返回-1即可，此时不管将该元素值划分到哪个段中都会超过
         print(-1)
         exit()
-    cur|=a[i] # 位运算
-    if cur>k:
+    cur|=a[i] # 位运算，将当前元素加入到当前子段中
+    if cur>k: # 如果加入了元素后超过了k，那么要重新划分一个子段
         cur = a[i]
         ans+=1
 print(ans)
